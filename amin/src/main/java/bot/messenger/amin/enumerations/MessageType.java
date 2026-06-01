@@ -6,7 +6,6 @@ public enum MessageType {
     PHOTO,
     GIF,
     STICKER,
-    EMOJI,
     VOICE,
     FILE
 }

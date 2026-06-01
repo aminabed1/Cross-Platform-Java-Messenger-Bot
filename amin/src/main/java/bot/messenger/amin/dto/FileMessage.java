@@ -7,12 +7,14 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
-@JsonTypeName("TEXT")
+@JsonTypeName("FILE")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-public class TextMessage extends Message {
+public class FileMessage extends MediaMessage {
     @NotBlank
-    private String text;
+    private String fileName;
+
+    private String mimeType;
 }

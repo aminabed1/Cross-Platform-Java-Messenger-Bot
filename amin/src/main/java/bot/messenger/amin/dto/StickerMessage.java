@@ -1,25 +1,20 @@
 package bot.messenger.amin.dto;
 
-import bot.messenger.amin.enumerations.MessageType;
-import bot.messenger.amin.enumerations.Platform;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@JsonTypeName("STICKER")
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class StickerMessage extends MediaMessage {
     @NotBlank
     private String emoji;
-    private String setName;
 
-    public StickerMessage(String messageId, String chatId, String senderId, Platform platform, long timestamp, boolean isOutgoing,
-                          String remoteFileId, String fileUrl, Long fileSize, String caption,
-                          String emoji, String setName) {
-        super(messageId, chatId, senderId, MessageType.STICKER, platform, timestamp, isOutgoing, remoteFileId, fileUrl, fileSize, caption);
-        this.emoji = emoji;
-        this.setName = setName;
-    }
+    private String setName;
 }

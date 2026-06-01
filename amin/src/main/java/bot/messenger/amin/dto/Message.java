@@ -6,47 +6,44 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        include = JsonTypeInfo.As.PROPERTY,
         property = "messageType",
         visible = true
-
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = TextMessage.class, name = "TEXT"),
-        @JsonSubTypes.Type(value = PhotoMessage.class, name = "PHOTO"),
-        @JsonSubTypes.Type(value = VideoMessage.class, name = "VIDEO"),
-        @JsonSubTypes.Type(value = VoiceMessage.class, name = "VOICE"),
-        @JsonSubTypes.Type(value = GifMessage.class, name = "GIF"),
+        @JsonSubTypes.Type(value = TextMessage.class,    name = "TEXT"),
+        @JsonSubTypes.Type(value = PhotoMessage.class,   name = "PHOTO"),
+        @JsonSubTypes.Type(value = VideoMessage.class,   name = "VIDEO"),
+        @JsonSubTypes.Type(value = VoiceMessage.class,   name = "VOICE"),
+        @JsonSubTypes.Type(value = GifMessage.class,     name = "GIF"),
         @JsonSubTypes.Type(value = StickerMessage.class, name = "STICKER"),
-        @JsonSubTypes.Type(value = EmojiMessage.class, name = "EMOJI")
+        @JsonSubTypes.Type(value = FileMessage.class,    name = "FILE")
 })
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@NoArgsConstructor
+@SuperBuilder
 public abstract class Message {
-
+    @NotBlank
     private String messageId;
 
-    @NotBlank(message = "Chat ID cannot be blank")
+    @NotBlank
     private String chatId;
 
-    @NotBlank(message = "Sender ID cannot be blank")
+    @NotBlank
     private String senderId;
 
-    @NotNull(message = "Message type is required")
+    @NotNull
     private MessageType messageType;
 
-    @NotNull(message = "Platform is required")
+    @NotNull
     private Platform platform;
 
     private long timestamp;
     private boolean isOutgoing;
 }
-
-

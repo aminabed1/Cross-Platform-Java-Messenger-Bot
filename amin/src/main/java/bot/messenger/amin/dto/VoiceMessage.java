@@ -1,23 +1,20 @@
 package bot.messenger.amin.dto;
 
-import bot.messenger.amin.enumerations.MessageType;
-import bot.messenger.amin.enumerations.Platform;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@JsonTypeName("VOICE")
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class VoiceMessage extends MediaMessage {
+    @Positive
     private int duration;
-    private String mimeType;
 
-    public VoiceMessage(String messageId, String chatId, String senderId, Platform platform, long timestamp, boolean isOutgoing,
-                        String remoteFileId, String fileUrl, Long fileSize, String caption,
-                        int duration, String mimeType) {
-        super(messageId, chatId, senderId, MessageType.VOICE, platform, timestamp, isOutgoing, remoteFileId, fileUrl, fileSize, caption);
-        this.duration = duration;
-        this.mimeType = mimeType;
-    }
+    private String mimeType;
 }

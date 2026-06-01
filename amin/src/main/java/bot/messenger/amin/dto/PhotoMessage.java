@@ -1,27 +1,21 @@
 package bot.messenger.amin.dto;
 
-import bot.messenger.amin.enumerations.MessageType;
-import bot.messenger.amin.enumerations.Platform;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@JsonTypeName("PHOTO")
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class PhotoMessage extends MediaMessage {
-    private int width ;
-    private int height;
-    String caption;
+    @Positive
+    private int width;
 
-    public PhotoMessage(String messageId, String chatId, String senderId,
-                        Platform platform, long timestamp, boolean isOutgoing,
-                        String remoteFileId, String fileUrl, Long fileSize,
-                        int width, int height, String caption) {
-        super(messageId, chatId, senderId, MessageType.PHOTO, platform, timestamp, isOutgoing, remoteFileId, fileUrl, fileSize, caption);
-        this.width = width;
-        this.height = height;
-        this.caption = caption;
-    }
+    @Positive
+    private int height;
 }

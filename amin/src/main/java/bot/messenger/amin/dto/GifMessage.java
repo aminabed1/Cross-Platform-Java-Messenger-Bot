@@ -1,23 +1,21 @@
 package bot.messenger.amin.dto;
 
-import bot.messenger.amin.enumerations.MessageType;
-import bot.messenger.amin.enumerations.Platform;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@JsonTypeName("GIF")
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class GifMessage extends MediaMessage {
+    @Positive
     private int width;
-    private int height;
 
-    public GifMessage(String messageId, String chatId, String senderId, Platform platform, long timestamp, boolean isOutgoing,
-                      String remoteFileId, String fileUrl, Long fileSize, String caption,
-                      int width, int height) {
-        super(messageId, chatId, senderId, MessageType.GIF, platform, timestamp, isOutgoing, remoteFileId, fileUrl, fileSize, caption);
-        this.width = width;
-        this.height = height;
-    }
+    @Positive
+    private int height;
 }

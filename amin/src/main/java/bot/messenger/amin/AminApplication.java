@@ -8,9 +8,4 @@ public class AminApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AminApplication.class, args);
 	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
 }
